@@ -2,6 +2,8 @@ import axios from "axios";
 import moment from "moment";
 import {useEffect,useState} from "react";
 
+const API_KEY = import.meta.env.VITE_API_KEY;
+
 export function Weather(){
 
 const[page,setPage]=useState("weather");
@@ -37,7 +39,7 @@ setSubmitCityName(changingCityName);
 }
 
 function LoadWeather(){
-axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${submitCityName}&appid=a219484079b512cf8ade54d609760a71`)
+axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${submitCityName}&appid=${API_KEY}`)
 .then(res=>{
 
 setWeatherObj(res.data);
@@ -53,12 +55,12 @@ LoadAir(res.data.coord.lat,res.data.coord.lon);
 }
 
 function LoadForecast(){
-axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${submitCityName}&appid=a219484079b512cf8ade54d609760a71`)
+axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${submitCityName}&appid=${API_KEY}`)
 .then(res=>setForecast(res.data.list));
 }
 
 function LoadAir(lat,lon){
-axios.get(`https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=a219484079b512cf8ade54d609760a71`)
+axios.get(`https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${API_KEY}`)
 .then(res=>setAir(res.data));
 }
 
